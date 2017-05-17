@@ -1,8 +1,3 @@
-import java.util.Scanner;
-
-/**
- * Exercice11
- */
 public class Exercice11 {
 
     /*
@@ -12,83 +7,108 @@ public class Exercice11 {
         chiffre 43 (base 10) en binaire on aura dans le tableau (lecture de gauche à droite pour les bits de mot) :
                                                     T = [2,1,1,0,1,0,1,-1]
     */
-    public static int[] convertirEnBase(int nombre, int base, int tableau[]) {
-        int tableau_temporaire[] = new int[tableau.length];
-        int compteur = 1;
-        while (nombre / base > 0) {
-            tableau[compteur] = nombre % base;
-            compteur++;
-            nombre /= base;
+
+    // Constante pour définir l'ordre
+    final static int ORDRE = 3;
+
+    // Fonction pour calculer la somme d'une ligne
+    public static int sommeLigne(int carre[][], int ligne) {
+        int resultat = 0;
+        for (int colonne = 0; colonne < ORDRE; colonne++) {
+            resultat += carre[ligne][colonne];
         }
-        tableau[compteur] = nombre % base;
-        return tableau;
+        return resultat;
     }
 
-    // Fonction pour calculer la taille du tableau qui représentera notre chiffre binaire (taille normale plus 2 car base au début et -1 à la fin)
-    public static int calculTailleTableau(int nombre, int base) {
-        int compteur = 1;
-        while (nombre / base > 0) {
-            compteur++;
-            nombre /= base;
+    // Fonction pour calculer la somme d'une colonne
+    public static int sommeColonne(int carre[][], int colonne) {
+        int resultat = 0;
+        for (int ligne = 0; ligne < ORDRE; ligne++) {
+            resultat += carre[ligne][colonne];
         }
-        compteur += 2;
-        return compteur;
+        return resultat;
     }
 
-    // Fonction pour afficher le tableau (final)
-    public static void afficherTableau(int tableau[]) {
-        int taille = tableau.length;
-        System.out.print("T = [");
-        for (int i = 0; i < taille - 1; i++) {
-            System.out.print(tableau[i] + ",");
+    // Fonction pour calculer la somme d'une diagonale
+    public static int sommeDiagonale1(int carre[][]) {
+        int resultat = 0;
+        for (int cellule = 0; cellule < ORDRE; cellule++) {
+            resultat += carre[cellule][cellule];
         }
-        System.out.print(tableau[taille-1]);
-        System.out.println("]");
+        return resultat;
+    }
+
+    // Fonction pour calculer la somme de l'autre diagonale (inverse)
+    public static int sommeDiagonale2(int carre[][]) {
+        int resultat = 0;
+        for (int cellule = ORDRE - 1; cellule >= 0; cellule--) {
+            resultat += carre[ORDRE - 1 - cellule][cellule];
+        }
+        return resultat;
+    }
+
+    // Fonction pour vérifier si un carré est magique ou non
+    public static boolean estMagique(int carre[][]) {
+        int sommeMagique = ORDRE * ( ORDRE * ORDRE + 1) / 2;
+        boolean testLigne = true, testColonne = true, testDiagonales = false;
+        for (int cellule = 0; cellule < ORDRE; cellule++) {
+            if (sommeLigne(carre, cellule) != sommeMagique) {
+                testLigne = false;
+            }
+            if (sommeColonne(carre, cellule) != sommeMagique) {
+                testColonne = false;
+            }
+        }
+        if ((sommeDiagonale1(carre) == sommeMagique) && (sommeDiagonale2(carre) == sommeMagique)) {
+            testDiagonales = true;
+        }
+        return (testLigne && testColonne && testDiagonales);
+    }
+
+    // Fonction pour essayer de placer un numero passé en paramètre dans le carré magique
+    public static void placer(int carre[][], int numero) {
+        if (numero == ORDRE * ORDRE + 1) {
+            if (estMagique(carre)) {
+                afficherCarre(carre);
+            }
+        }
+        else {
+            for (int ligne = 0; ligne < ORDRE; ligne++) {
+                for (int colonne = 0; colonne < ORDRE; colonne++) {
+                    if (carre[ligne][colonne] == 0) {
+                        carre[ligne][colonne] = numero;
+                        placer(carre, numero + 1);
+                        carre[ligne][colonne] = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void afficherCarre(int carre[][]) {
+        System.out.println("\nCarre magique :");
+		for (int ligne = 0; ligne < ORDRE; ligne++) {
+			for (int colonne = 0; colonne < ORDRE; colonne++) {
+				System.out.print(carre[ligne][colonne]);
+                if (colonne != ORDRE - 1) {
+                    System.out.print(" ");
+                }
+                else {
+                    System.out.print("\n");
+                }
+			}
+		}
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int nombre = 0, base = 10, taille = 2;
-        String saisie;
-        boolean valide = true;
-        // Control de saisie sur le nombre
-        do {
-            valide = true;
-            System.out.print("Saisissez le nombre que vous voulez convertir : ");
-            saisie = sc.nextLine();
-            // On teste d'abord si c'est un entier qui a été saisi
-            try {
-                nombre = Integer.parseInt(saisie);
-            } catch (NumberFormatException e) {
-                valide = false;
+        int numero = 1, carre[][] = new int[ORDRE][ORDRE];
+        for (int ligne = 0; ligne < ORDRE; ligne ++) {
+            for (int colonne = 0; colonne < ORDRE; colonne ++) {
+                carre[ligne][colonne] = 0;
             }
-            // Si oui, on vérifie qu'il est bien positif(>0)
-            if (valide) {
-                valide = (nombre >= 0);
-            }
-        } while (valide == false);
-        // Control de saisie sur la base
-        do {
-            valide = true;
-            System.out.print("Saisissez la base : ");
-            saisie = sc.nextLine();
-            // On teste d'abord si c'est un entier qui a été saisi
-            try {
-                base = Integer.parseInt(saisie);
-            } catch (NumberFormatException e) {
-                valide = false;
-            }
-            // Si le nombre est bien un entier, on teste si c'est une base valide (2, 8 ou 16)
-            if (valide) {
-                valide = (base == 2 || base == 8 || base == 16);
-            }
-        } while (valide == false);
-        taille = calculTailleTableau(nombre, base);
-        int tableau[] = new int[taille];
-        tableau[0] = base;
-        tableau[taille-1] = -1;
-        tableau = convertirEnBase(nombre, base, tableau);
-        afficherTableau(tableau);
+        }
+        System.out.println("Voici tous les arrangements possibles du carre magique d'ordre 3 (matrice de 3x3) :");
+        placer(carre, numero);
     }
 
 }
