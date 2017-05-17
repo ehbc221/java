@@ -51,7 +51,6 @@ public class Exercice11 {
         int nombre = 0, base = 10, taille = 2;
         String saisie;
         boolean valide = true;
-        System.out.println();
         // Control de saisie sur le nombre
         do {
             valide = true;

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Exercice10
  */
@@ -19,7 +21,6 @@ public class Exercice10 {
             while ((j_copie / 2 % 2) == 0) {
                 n++;
                 j_copie /= 2;
-
             }
             s = ((j_copie / 2) - 1) / 2;
         }
@@ -29,17 +30,32 @@ public class Exercice10 {
     // Fonction pour afficher le résultat après la résolution de l'équation
     public static void afficherResultat(long j, long n, long s) {
         System.out.println("j = 2^n (2s + 1)");
-        System.out.println("On a j = " + j + ", d'où n = " + n + " et s = " + s);
-        System.out.println("L'équation devient donc : " + j + " = 2^" + n + " (2 X " + s + " + 1)\n");
+        System.out.println("On a j = " + j + ", d'ou n = " + n + " et s = " + s);
+        System.out.println("L'equation devient donc : " + j + " = 2^" + n + " (2 X " + s + " + 1)\n");
     }
 
     public static void main(String[] args) {
-        long j = 22, k = 17, l = 21, m = 36, n = 16;
+        Scanner sc = new Scanner(System.in);
+        long j = 22;
+        String saisie;
+        boolean valide = true;
+        // Control de saisie sur le nombre
+        do {
+            valide = true;
+            System.out.print("Donnez j : ");
+            saisie = sc.nextLine();
+            // On teste d'abord si c'est un long qui a été saisi
+            try {
+                j = Long.parseLong(saisie);
+            } catch (NumberFormatException e) {
+                valide = false;
+            }
+            // Si oui, on vérifie qu'il est bien positif(>0)
+            if (valide) {
+                valide = (j >= 0);
+            }
+        } while (valide == false);
         calculEquation(j);
-        calculEquation(k);
-        calculEquation(l);
-        calculEquation(m);
-        calculEquation(n);
     }
 
 }
