@@ -5,7 +5,7 @@ import java.lang.Math;
 public class Point {
 
     /*
-        Attributs (privés)
+        Attributs
     */
 
     private double x;
@@ -31,7 +31,7 @@ public class Point {
     }
 
     /*
-        Autres méthodes
+        Méthodes
     */
 
     public void setX(double x) {

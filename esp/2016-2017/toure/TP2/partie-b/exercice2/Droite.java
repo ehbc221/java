@@ -5,7 +5,7 @@ import point.*;
 public class Droite {
 
     /*
-        Les attributs définissants une droite
+        Attributs
     */
 
     private Point p0;
@@ -32,7 +32,7 @@ public class Droite {
     }
 
     /*
-        Autres méthodes
+        Méthodes
     */
 
     public double slope () {
