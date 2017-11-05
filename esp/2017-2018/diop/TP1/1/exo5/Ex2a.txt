@@ -1,0 +1,30 @@
+1)  A la ligne 32, on affiche le tableau t.
+    Donc on a:
+        1 2 3 4 5 6
+
+2)  A la ligne 33, on appelle la fonction f avec comme paramètres t, 2 et 12.
+    Ce qui a pour effet de modifier la valeur numéro 2(indice 3 car on commence par l'indice 0) du tableau en 12. Puis on affiche le tableau t(ligne 34).
+    Donc on a:
+        1 2 12 4 5 6
+
+3)  A la ligne 35, on affecte au tableau u le tableau t(ce  n'est pas une copie, mais les deux tableaux pointent sur les memes valeurs).
+    D'où u = (1 2 12 4 5 6). A la ligne 36, on remplace l'élément à l'indice 1 du tableau(2) u par 0. On affiche le tableau u(ligne 37).
+    Donc on a:
+        1 0 12 4 5 6
+
+4)  A la ligne 38, on affiche le tableau t. Comme dit précédemment, les 2 tableaux pointent sur les memes elements, d'où t = u.
+    Donc on a:
+        1 0 12 4 5 6
+
+5)  Cette fois ci, à la ligne 39, on copie les éléments du tableau t(1 0 12 4 5 6) dans le tableau v.
+    Ce qui veut dire qu'ils ont les memes éléments, mais ne pointent pas sur les memes éléments.
+    Donc la modification de l'une n'impacte pas sur l'autre.
+
+6)  A la ligne 40, on modifie l'élément d'indice 0 du tableau v(1) par 0.
+    Puis on affiche ce tableau à la ligne 41.
+    Donc on a:
+        0 0 12 4 5 6
+
+7)  A la ligne 42, on affiche le tableau t, lui qui n'a pas changé comme on l'a éxpliqué dans la partie 5).
+    Donc on a:
+        1 0 12 4 5 6

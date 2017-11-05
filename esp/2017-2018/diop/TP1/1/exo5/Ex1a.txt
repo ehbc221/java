@@ -1,0 +1,19 @@
+1)  A la ligne 10, on affiche a et b, qui étaient déclarées à 2 et 3.
+    Donc on a:
+        2 3
+
+2)  Puis, à la ligne 11, on appelle la fonction f1 avec b(3) et a(2) => (à noter l'ordre) dans laquelle on incrémente leurs valeurs avant de les afficher.
+    Donc on a:
+        4 3
+
+3)  Ensuite, à la ligne 12, on réaffiche les valeurs de a et b.
+    Etant donné que les incrémentations ont été faites dans les fonctions, les variables gardent leurs valeurs dans la fonction main.
+    Donc on a:
+        2 3
+
+4)  Enfin, on affecte à la variable b le résultat de l'appel de la fonction f1. Cette dernière étant appelée avec les memes paramètres(et dans le meme ordre),
+    on aura le meme affichage que 2), c-a-d:
+        4 3
+    Et b aura la valeur retournée, c-a-d a+b(ligne 5) d'où 7.
+    On affichera plutard la valeur de a et b, a n'ayant pas changé et b le résultat précédent, on aura donc:
+        2 7
