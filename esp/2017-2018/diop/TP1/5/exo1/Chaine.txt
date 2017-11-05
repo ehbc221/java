@@ -1,0 +1,26 @@
+A)  On instancie une nouvelle chaine(String) ch1, puis on l'affiche.
+    Donc on a:
+        A - ch1 =::
+
+B)  On initialise une chaine(String) ch2 à "hello", puis on l'affiche.
+    Donc on a:
+        B - ch2 =:hello:
+
+C)  On instancie et initialise une chaine(String) ch3 à "bonjour", puis on l'affiche.
+    Donc on a:
+        C - ch3 =:bonjour:
+
+D)  On instancie une nouvelle chaine(String) ch4 et on l'initialise à ch3.
+    Sachant qu'en java, les chaines sont immutables, la modification de l'une n'impactera pas sur l'autre.
+    Donnc on a:
+        D - ch4 =:bonjour:
+
+E)  On modifie ch3 en "bonsoir", puis on l'affiche avec ch4(qui ne change pas comme précedemment éxpliqué).
+    Donnc on a:
+        E - ch4 =:bonjour: ch3 =:bonsoir:
+
+F)  On modifie ch4 à ch3(c-a-d "bonsoir"), puis ch3 à "au revoir". De meme, ch4 ne change pas d'après le principe éxpliqué à la réponse D).
+    Donnc on a:
+        E - ch4 =:bonsoir: ch3 =:au revoir:
+
+
