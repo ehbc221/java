@@ -1,0 +1,20 @@
+1) Que vaut p1.identique(p2)? Expliquer.
+p1.identique(p2) vaut true.
+
+Explication:
+
+Point p1=new Pointcol (3,4, (byte) 5);
+Point p2=new Pointcol (3,4, (byte) 6);
+
+Avec ces deux instructions, nous appliquons le surcasting de Point et PointCol.
+De ce fait, à l'appel de p1.identique(p2), la méthode identique(Point) qui prend en argument un Point va etre cherchée dans la classe PointCol. Puisque nous avions déclaré dans cette dernière une méthode identique(PointCol), c-a-d qui prend en argument un PointCol, nous allons remonter dans la classe mère c-a-d Point pour y chercher une méthode identique(Point). On la trouve donc elle sera éxecutée. Etant donné que cette méthode ne verifie que les champs x et y, l'égalité sera vérifiée et la méthode renverra true.
+
+2) Peut-on faire en sorte d’avoir le résultat escompté ?
+Oui on peut l'avoir.
+NB : Le résultat escompté ici étant : p1.identique(p2) renvoie false.
+
+Explication:
+
+Pour que le champ c soit pris dans la comparaison, nous devons avoir une méthode identique dans PointCol qui prend en argument un Point. Et dans la comparaison du champs c, nous allons opérer au casting du champs c de l'argument p2 pour qu'il puisse le prendre en compte et ne pas renvoyer une erreur comme quoi un Point n'a pas de champs c(byte). Donc à la fin, à l'appel de p1.identiwue(p2), c'est cette méthode qui sera appelée(car p2 de type Point) et donc vérifiera aussi le champs c, ce qui renverra false (car 5 <> 6).
+
+Pour plus de détails, cf les différentes classe mises en eouvre.
